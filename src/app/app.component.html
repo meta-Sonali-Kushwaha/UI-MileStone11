@@ -1,0 +1,5 @@
+<div>
+  <app-nav-bar (onCreateTask)="toggleCreateTask($event)"></app-nav-bar>
+  <app-create-task *ngIf="showMe" (onAddTask)="taskAdd($event)"></app-create-task>
+  <app-task-container [tasks]="tasks"></app-task-container>
+</div>

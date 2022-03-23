@@ -1,0 +1,15 @@
+.newTaskContainer{
+    background-color: rgb(228, 222, 222);
+    width: 250px;
+    height: 400px;
+    height: fit-content;
+    text-align: center;
+    padding-bottom: 2px;
+    padding-top: 0;
+}
+h4{
+    font-size: 1.2rem;  
+    background-color: rgb(14, 28, 94);
+    color: white;
+    padding: 5px;
+}
