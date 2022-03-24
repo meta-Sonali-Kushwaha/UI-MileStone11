@@ -1,8 +1,17 @@
 .taskItem{
+    display: flex;
+    justify-content: space-between;
     border: 3px solid rgb(7, 7, 95);
     margin: 4px;
+    padding-left: 14px;
 }
 .title{
     font-size: 1.2rem;
     color: rgb(19, 19, 102);
+}
+.taskButtons i{
+     display: block;
+     margin-top: 15px;
+     padding-right: 10px;
+     padding-bottom: 10px;
 }

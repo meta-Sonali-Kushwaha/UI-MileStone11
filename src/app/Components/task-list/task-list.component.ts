@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from "../../Task";
 
 @Component({
@@ -9,11 +9,22 @@ import { Task } from "../../Task";
 export class TaskListComponent implements OnInit {
   @Input() tasks : Task[];
   @Input() heading : string;
-  // @Input() taskData : Task[];
 
+  @Output() taskTobeEdited = new EventEmitter<Task>();
+
+  task: Task;
   constructor() { 
   }
-
   ngOnInit(): void {
   }
+
+  removeTask(idx){
+    this.tasks.splice(idx,1);
+  }
+  editTask(idx){
+    this.task = this.tasks[idx];
+    this.taskTobeEdited.emit(this.task);
+    // console.log(this.taskTobeEdited);
+  }
+
 }

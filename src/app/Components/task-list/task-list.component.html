@@ -1,6 +1,11 @@
 <div class="newTaskContainer">
     <h4>{{heading}}</h4>
-    <div *ngFor="let task of tasks">
-        <app-task-item [task] = "task"></app-task-item>
+    <div *ngFor="let task of tasks; let idx = index">
+        <app-task-item
+            [task] = "task"
+            [index] = "idx" 
+            (taskTobeDeleted) = "removeTask(idx)"
+            (taskTobeEdited) = "editTask(idx)">
+        </app-task-item>
     </div>
 </div>

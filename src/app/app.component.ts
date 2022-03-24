@@ -13,15 +13,17 @@ export class AppComponent {
     this.showMe = !this.showMe;
   };
 
-  tasks: Task[] = [];
+  Newtasks: Task[] = [];
   taskData: Task;
-  // temp: Task;
+
   taskAdd(event){
     this.taskData = event;
-    console.log(typeof(this.tasks));
-    // console.log(typeof(this.taskData));
-    // console.log(typeof(this.temp));
-    this.tasks.push(this.taskData);
-    // console.log(this.tasks);
+    this.Newtasks.push(this.taskData);
+  }
+
+  taskTobeEdited: Task;
+  EditTask(event){
+    this.showMe = true
+    this.taskTobeEdited = event;
   }
 }

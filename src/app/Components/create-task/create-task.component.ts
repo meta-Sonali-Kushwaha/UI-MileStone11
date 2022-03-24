@@ -13,11 +13,15 @@ export class CreateTaskComponent implements OnInit {
   task: Task;
 
   @Output() onAddTask = new EventEmitter<Task>();
-  // @Input() showMe: boolean;
+  @Input() taskTobeEdited: Task;
 
   constructor() { 
   }
   ngOnInit(): void {
+    // console.log(this.taskTobeEdited);
+    this.title = this.taskTobeEdited.Title;
+    this.desc = this.taskTobeEdited.Description;
+    this.priority = this.taskTobeEdited.Priority
   }
   addTask(){
     this.task = {
@@ -28,10 +32,8 @@ export class CreateTaskComponent implements OnInit {
       CompletionDate: new Date(null),
       Priority: this.priority
     }
-    
     this.onAddTask.emit(this.task);
-    // this.showMe = false;
-    // console.log(this.showMe);  
   }
 
+  
 }

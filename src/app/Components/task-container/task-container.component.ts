@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Task } from "../../Task";
 
 @Component({
@@ -7,49 +8,56 @@ import { Task } from "../../Task";
   styleUrls: ['./task-container.component.css']
 })
 export class TaskContainerComponent implements OnInit {
-  // @Input() taskData : Task;
+  @Output() EditTask = new EventEmitter<Task>();
   @Input() tasks: Task[];
+
+  inProgress: Task[];
+  completedTask: Task[];
 
   // tasks: Task[];
   constructor() {
-    // this.tasks.push(this.taskData);
-    // this.tasks = [
-    //   {
-    //     Title: "Drink Water",
-    //     Description: "2 glass of water",
-    //     Status: "New",
-    //     CreationDate: new Date("2022-02-20"),
-    //     CompletionDate: new Date("2022-02-21"),
-    //     Priority: "High"
-    //   },
-    //   {
-    //     Title: "Eat food",
-    //     Description: "Green vegetables",
-    //     Status: "New",
-    //     CreationDate: new Date("2022-02-20"),
-    //     CompletionDate: new Date("2022-02-21"),
-    //     Priority: "Low"
-    //   }
-    // ]
+    // this.inProgress = this.tasks;
+    // this.inProgress.push();
+    this.inProgress = [
+      {
+        Title: "ttitle",
+        Description: "",
+        Status: "New",
+        CreationDate: new Date(null),
+        CompletionDate: new Date(null),
+        Priority: "High"
+      }
+    ];
+    this.completedTask = [
+      {
+        Title: "",
+        Description: "",
+        Status: "New",
+        CreationDate: new Date(null),
+        CompletionDate: new Date(null),
+        Priority: ""
+      }
+    ]
   }
   ngOnInit(): void {
   }
-  // submit(){
-  //   console.log(this.taskData);
-  // }
-  // this.addTask(
-  //   console.log(this.taskData);
-  //   this.tasks.push(this.taskData);
-  // );
-  // this.addTask(){
-  //   console.log(this.taskData);
-  //   this.tasks.push(this.taskData);
-  // }
-  // ngOnChanges(changes: SimpleChanges){
-  //   for(let property in changes){
-  //     if(property === 'taskData'){
-  //       this.tasks.push(this.taskData);
-  //     }
-  //   }
-  // }
+
+  taskTobeEdited(event){
+    // console.log(event);
+    this.EditTask.emit(event);
+  }
+  
+  // function used in drag and drop
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
 }

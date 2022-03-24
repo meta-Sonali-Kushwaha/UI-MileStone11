@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from "../../Task";
 
 @Component({
@@ -8,14 +8,37 @@ import { Task } from "../../Task";
 })
 export class TaskItemComponent implements OnInit {
   @Input() task : Task;
-  // @Input() taskData : Task;
-  constructor() { 
-    // console.log("task-item");
-    // console.log(this.taskData);
-  }
+  @Input() index : Number;
 
+  @Output() taskTobeDeleted = new EventEmitter<Number>();
+  @Output() taskTobeEdited = new EventEmitter<Task>();
+
+  constructor() {
+  }
   ngOnInit(): void {
   }
+
+  deleteTask(idx){
+    this.taskTobeDeleted.emit(idx);
+    console.log("dlt");
+    // This also works:-
+    // this.taskTobeDeleted.emit("abcd");
+    // i.e anything inside curly braces does not have any effect
+  }
+
+  editTask(idx){
+    this.taskTobeEdited.emit(this.task);
+    this.deleteTask(idx);
+  }
+
+  // makes border none for empty task used in progress and completed task
+  getBorderColor(){
+    if (this.task.Priority === "") {
+      return 'none';
+    }
+  }
+
+  // function to color code the task acc to priority
   getpriorityTaskColor(){
     if (this.task.Priority === 'High') {
       return 'red';
@@ -23,8 +46,11 @@ export class TaskItemComponent implements OnInit {
     else if (this.task.Priority === 'Low') {
       return 'green';
     }
-    else{
+    else if (this.task.Priority === 'Medium') {
       return 'yellow'
+    }
+    else{
+      return 'none'
     }
   }
 }

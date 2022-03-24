@@ -1,5 +1,36 @@
 <div class="taskContainer" >
-    <app-task-list heading = "New Tasks" [tasks] = "tasks"  ></app-task-list>
-    <app-task-list heading = "In Progress Tasks" [tasks] = []></app-task-list>
-    <app-task-list heading = "Completed Tasks" [tasks] = []></app-task-list>
+    <!-- new tasks -->
+    <div id ="list-1" cdkDropList #taskList="cdkDropList" [cdkDropListData]="tasks" 
+        [cdkDropListConnectedTo]="['list-2', 'list-3']" (cdkDropListDropped)="drop($event)">
+        <app-task-list 
+            heading = "New Tasks" 
+            [tasks] = "tasks" 
+            (taskTobeEdited) = "taskTobeEdited($event)"
+            >
+        </app-task-list>
+    </div>
+    
+    <!-- in progress task -->
+    <div id ="list-2" cdkDropList #progressList="cdkDropList" [cdkDropListData]="inProgress" 
+        [cdkDropListConnectedTo]="['list-1', 'list-3']" (cdkDropListDropped)="drop($event)">
+        <app-task-list 
+            heading = "In Progress Tasks" 
+            [tasks] = "inProgress" 
+            (taskTobeEdited) = "taskTobeEdited($event)"
+            >
+        </app-task-list>
+    </div>
+
+    <!-- completed task -->
+    <div id ="list-3" cdkDropList #completedList="cdkDropList" [cdkDropListData]="completedTask" 
+        [cdkDropListConnectedTo]="['list-2', 'list-1']" (cdkDropListDropped)="drop($event)">
+        <app-task-list 
+            heading = "Completed Tasks" 
+            [tasks] = "completedTask" 
+            (taskTobeEdited) = "taskTobeEdited($event)"
+            >
+        </app-task-list>
+    </div>
+    
+    <!-- <app-task-list heading = "Completed Tasks" [tasks] = []></app-task-list> -->
 </div>
