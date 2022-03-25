@@ -8,19 +8,25 @@ import { Task } from "../../Task";
 })
 export class TaskItemComponent implements OnInit {
   @Input() task : Task;
-  @Input() index : Number;
+  @Input() index : Number; //used to delete or edit the task
+  @Input() heading : String; //used to remove edit button from completed task
 
   @Output() taskTobeDeleted = new EventEmitter<Number>();
   @Output() taskTobeEdited = new EventEmitter<Task>();
 
+  showEdit: Boolean;
   constructor() {
   }
   ngOnInit(): void {
+    this.showEdit = true;
+    if(this.heading === "Completed"){
+      console.log("heading cmpltd");
+      this.showEdit = false;
+    }
   }
 
   deleteTask(idx){
     this.taskTobeDeleted.emit(idx);
-    console.log("dlt");
     // This also works:-
     // this.taskTobeDeleted.emit("abcd");
     // i.e anything inside curly braces does not have any effect

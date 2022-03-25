@@ -24,6 +24,10 @@ export class CreateTaskComponent implements OnInit {
     this.priority = this.taskTobeEdited.Priority
   }
   addTask(){
+    if(this.title == undefined || this.desc == undefined || this.priority == undefined){
+      return false;
+    }
+
     this.task = {
       Title: this.title,
       Description: this.desc,

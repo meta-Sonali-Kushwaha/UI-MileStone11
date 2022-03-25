@@ -20,12 +20,12 @@ export class TaskContainerComponent implements OnInit {
     // this.inProgress.push();
     this.inProgress = [
       {
-        Title: "ttitle",
+        Title: "",
         Description: "",
         Status: "New",
         CreationDate: new Date(null),
         CompletionDate: new Date(null),
-        Priority: "High"
+        Priority: ""
       }
     ];
     this.completedTask = [

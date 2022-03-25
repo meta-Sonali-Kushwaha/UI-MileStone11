@@ -5,7 +5,7 @@
         <p class="description">{{task.Description}}</p>
     </div>
     <div class="taskButtons" *ngIf = "task.Priority">
-        <i class="material-icons" (click) = "editTask(index)">edit</i>
+        <i class="material-icons" *ngIf = "showEdit" (click) = "editTask(index)">edit</i>
         <i class="material-icons" (click) = "deleteTask(index)">delete</i>
     </div>
 </div>
