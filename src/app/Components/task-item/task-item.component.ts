@@ -19,10 +19,14 @@ export class TaskItemComponent implements OnInit {
   }
   ngOnInit(): void {
     this.showEdit = true;
-    if(this.heading === "Completed"){
-      console.log("heading cmpltd");
+    if(this.heading === "Completed Tasks"){
       this.showEdit = false;
+      this.task.Status = "Completed";
     }
+    if(this.heading === "In Progress Tasks"){
+      this.task.Status = "In Progress";
+    }
+    
   }
 
   deleteTask(idx){
